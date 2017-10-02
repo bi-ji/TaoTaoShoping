@@ -1,5 +1,7 @@
 package com.taotao.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.taotao.common.pojo.ItemCatListVO;
 import com.taotao.common.pojo.ItemListVO;
 import com.taotao.pojo.TbItem;
 import com.taotao.service.ITbItemService;
@@ -37,6 +40,7 @@ public class TbItemController {
 	public ItemListVO listItem(Integer page,Integer rows) {
 		return tbItemService.listItem(page,rows);
 	}
+	
 	
 	
 	

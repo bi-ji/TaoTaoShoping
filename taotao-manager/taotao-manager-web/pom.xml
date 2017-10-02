@@ -12,34 +12,34 @@
 	<packaging>war</packaging>
 	<name>taotao-manager-web Maven Webapp</name>
 	<url>http://maven.apache.org</url>
-  <build>
-    <finalName>taotao-manager-web</finalName>
-  </build>
-  <dependencies>
-  	<dependency>
-  		<groupId>com.edu.taotao</groupId>
-  		<artifactId>taotao-manager-service</artifactId>
-  		<version>1.0.0-SNAPSHOT</version>
-  	</dependency>
-  			<!-- JSP相关 -->
-			<dependency>
-				<groupId>jstl</groupId>
-				<artifactId>jstl</artifactId>
-				</dependency>
-			<dependency>
-				<groupId>javax.servlet</groupId>
-				<artifactId>servlet-api</artifactId>
-				<scope>provided</scope>
-			</dependency>
-			<dependency>
-				<groupId>javax.servlet</groupId>
-				<artifactId>jsp-api</artifactId>
-				<scope>provided</scope>
-			</dependency>
-			<!-- 文件上传组件 -->
-			<dependency>
-				<groupId>commons-fileupload</groupId>
-				<artifactId>commons-fileupload</artifactId>
-				</dependency>
-  </dependencies>
+	<build>
+		<finalName>taotao-manager-web</finalName>
+	</build>
+	<dependencies>
+		<dependency>
+			<groupId>com.edu.taotao</groupId>
+			<artifactId>taotao-manager-service</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+		<!-- JSP相关 -->
+		<dependency>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jsp-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<!-- 文件上传组件 -->
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+		</dependency>
+	</dependencies>
 </project>
