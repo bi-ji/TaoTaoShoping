@@ -1,6 +1,9 @@
 package com.taotao.service;
 
-import com.taotao.common.pojo.ItemListVO;
+import java.util.List;
+
+import com.taotao.common.pojo.DataGridDataVO;
+import com.taotao.common.pojo.TaotaoResult;
 import com.taotao.pojo.TbItem;
 
 /**
@@ -20,6 +23,23 @@ public interface ITbItemService {
 	 * @param rows
 	 * @return
 	 */
-	ItemListVO listItem(Integer page, Integer rows);
+	DataGridDataVO listItem(Integer page, Integer rows);
+
+	/**
+	 * 保存商品
+	 * @param item
+	 * @param itemParams 
+	 * @param desc 
+	 * @return
+	 */
+	TaotaoResult saveItem(TbItem item, String desc, String itemParams);
+
+	/**
+	 * 删除商品
+	 * @param ids
+	 * @return
+	 */
+	TaotaoResult deleteItems(List<Long> ids);
+
 
 }

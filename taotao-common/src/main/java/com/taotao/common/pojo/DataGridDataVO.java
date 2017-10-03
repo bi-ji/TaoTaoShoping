@@ -8,7 +8,7 @@ import java.util.List;
  * @Date 2017年10月1日
  * @description
  */
-public class ItemListVO {
+public class DataGridDataVO {
 
 	private long total;
 	private List<?> rows;
