@@ -39,9 +39,14 @@ public class TbItemCatServiceImpl implements ITbItemCatService {
 		Criteria criteria = example.createCriteria();
 		criteria.andParentIdEqualTo(parentId);
 		List<TbItemCat> parentItems = tbItemCatMapper.selectByExample(example);
-		parentItems.forEach(parent -> {
+		int count = 0;
+		for (TbItemCat parent : parentItems) {
 			// 是祖先节点
 			if (parent.getIsParent()) {
+
+				if (count++ >= 14) {
+					break;
+				}
 				ItemCat itemCat = new ItemCat();
 				itemCat.setUrl("/products/" + parent.getId() + ".html");
 				if (parent.getParentId().equals(0)) {
@@ -54,7 +59,8 @@ public class TbItemCatServiceImpl implements ITbItemCatService {
 			} else {// 是子节点
 				retList.add("/products/" + parent.getId() + ".html|" + parent.getName());
 			}
-		});
+
+		}
 		return retList;
 	}
 
