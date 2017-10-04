@@ -6,7 +6,7 @@ package com.taotao.common.pojo;
  * @Date 2017年10月1日
  * @description
  */
-public class ItemCatListVO {
+public class TreeNodeVO {
 
 	// 编号
 	private Long id;

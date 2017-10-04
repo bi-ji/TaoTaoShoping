@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.taotao.common.pojo.ItemCatListVO;
+import com.taotao.common.pojo.TreeNodeVO;
 import com.taotao.common.pojo.DataGridDataVO;
 import com.taotao.common.pojo.TaotaoResult;
 import com.taotao.pojo.TbItem;

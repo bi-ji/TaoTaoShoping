@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.taotao.common.pojo.ItemCatListVO;
+import com.taotao.common.pojo.TreeNodeVO;
 import com.taotao.pojo.TbItemCat;
 import com.taotao.service.ITbItemCatService;
 
@@ -29,12 +29,12 @@ public class TbItemCatController {
 	@RequestMapping(value = "/item/cat/list", method = RequestMethod.POST)
 	@ResponseBody
 	// 如果id为null使用默认值 ，也就是parentId为0的分类列表
-	public List<ItemCatListVO> findItemCatList(@RequestParam(value = "id", defaultValue = "0") Long parentId)
+	public List<TreeNodeVO> findItemCatList(@RequestParam(value = "id", defaultValue = "0") Long parentId)
 			throws Exception {
 		List<TbItemCat> result = tbItemCatService.findItemCatListByParentId(parentId);
-		List<ItemCatListVO> items = new ArrayList<>();
+		List<TreeNodeVO> items = new ArrayList<>();
 		result.forEach(item -> {
-			ItemCatListVO itemVO = new ItemCatListVO();
+			TreeNodeVO itemVO = new TreeNodeVO();
 			itemVO.setId(item.getId());
 			itemVO.setText(item.getName());
 			itemVO.setState(item.getIsParent() ? "closed" : "open");
