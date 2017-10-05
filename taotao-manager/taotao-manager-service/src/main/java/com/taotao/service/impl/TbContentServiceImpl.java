@@ -1,15 +1,19 @@
 package com.taotao.service.impl;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.taotao.common.pojo.DataGridDataVO;
 import com.taotao.common.pojo.TaotaoResult;
+import com.taotao.common.utils.HttpUtil;
 import com.taotao.mapper.TbContentMapper;
 import com.taotao.pojo.TbContent;
 import com.taotao.pojo.TbContentCriteria;
@@ -27,6 +31,12 @@ public class TbContentServiceImpl implements ITbContentService {
 
 	@Autowired
 	private TbContentMapper tbContentMapper;
+
+	@Value("${rest.url}")
+	private String restUrl;
+
+	@Value("${get.syncIndexContentCategory}")
+	private String getRequestSyncIndexContentCategory;
 
 	@Override
 	public DataGridDataVO pageContentByCategoryId(Long categoryId, Integer page, Integer rows) {
@@ -47,6 +57,11 @@ public class TbContentServiceImpl implements ITbContentService {
 		content.setCreated(new Date());
 		content.setUpdated(new Date());
 		tbContentMapper.insert(content);
+		try {
+			HttpUtil.doGet(restUrl + getRequestSyncIndexContentCategory + content.getCategoryId());
+		} catch (Exception e) {
+		}
+
 		return TaotaoResult.ok();
 	}
 
