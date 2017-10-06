@@ -17,6 +17,6 @@
 		</plugin>
 	</plugins>
 	<mappers>
-		<package name="com/taotao/search/mapper/*.xml" />
+		<package name="com/edu/taotao/search/dao/*Mapper.xml" />
 	</mappers>
 </configuration>
