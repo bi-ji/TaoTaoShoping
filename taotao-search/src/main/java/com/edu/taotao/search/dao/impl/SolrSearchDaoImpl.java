@@ -47,7 +47,7 @@ public class SolrSearchDaoImpl implements ISolrSearchDao {
 			} else {
 				title = (String) result.get("item_title");
 			}
-			vo.setTitile(title);
+			vo.setTitle(title);
 			vo.setImage((String) result.get("item_image"));
 			vo.setPrice((Long) result.get("item_price"));
 			vo.setSellPoint((String) result.get("item_sell_point"));

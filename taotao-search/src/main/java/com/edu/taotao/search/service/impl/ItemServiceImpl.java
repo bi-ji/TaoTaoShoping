@@ -40,7 +40,7 @@ public class ItemServiceImpl implements IItemService {
 			items.forEach(item -> {
 				SolrInputDocument document = new SolrInputDocument();
 				document.addField("id", item.getId());
-				document.addField("item_title", item.getTitile());
+				document.addField("item_title", item.getTitle());
 				document.addField("item_sell_point", item.getSellPoint());
 				document.addField("item_category_name", item.getCategoryName());
 				document.addField("item_price", item.getPrice());

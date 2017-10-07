@@ -4,11 +4,11 @@
 
 	<select id="listSolrAnalyItems" resultType="com.taotao.common.pojo.SearchItemVO">
 		SELECT
-		a.id,
-		a.title,
+		a.id id,
+		a.title title,
 		a.sell_point sellPoint,
-		a.price,
-		a.image,
+		a.price price,
+		a.image image,
 		b. NAME categoryName
 		FROM
 		tb_item a

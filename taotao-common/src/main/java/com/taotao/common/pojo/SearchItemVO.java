@@ -9,7 +9,7 @@ package com.taotao.common.pojo;
 public class SearchItemVO {
 
 	private String id;
-	private String titile;
+	private String title;
 	private String sellPoint;
 	private Long price;
 	private String image;
@@ -24,12 +24,12 @@ public class SearchItemVO {
 		this.id = id;
 	}
 
-	public String getTitile() {
-		return titile;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setTitile(String titile) {
-		this.titile = titile;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public String getSellPoint() {
@@ -66,15 +66,22 @@ public class SearchItemVO {
 
 	public String getImage() {
 		return image;
-	}
+	}  
 
 	public void setImage(String image) {
 		this.image = image;
 	}
 
+	public String[] getImages() {
+		if (this.image != null) {
+			return this.image.split(",");
+		}
+		return null;
+	}
+	
 	@Override
 	public String toString() {
-		return "SearchItemVO [id=" + id + ", titile=" + titile + ", sellPoint=" + sellPoint + ", price=" + price
+		return "SearchItemVO [id=" + id + ", title=" + title + ", sellPoint=" + sellPoint + ", price=" + price
 				+ ", image=" + image + ", categoryName=" + categoryName + ", itemDesc=" + itemDesc + "]";
 	}
 
