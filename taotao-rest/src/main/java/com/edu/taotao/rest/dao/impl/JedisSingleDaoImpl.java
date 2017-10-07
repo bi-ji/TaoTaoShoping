@@ -82,4 +82,12 @@ public class JedisSingleDaoImpl implements IJedisDao {
 		return retVal;
 	}
 
+	@Override
+	public Long expire(String key, Integer seconds) {
+		Jedis jedis = jedisPool.getResource();
+		Long retVal = jedis.expire(key, seconds);
+		jedis.close();
+		return retVal;
+	}
+
 }

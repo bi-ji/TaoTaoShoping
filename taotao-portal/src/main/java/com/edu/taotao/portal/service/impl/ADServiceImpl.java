@@ -26,7 +26,7 @@ public class ADServiceImpl implements IADService {
 	@Value("${rest.url}")
 	private String restUrl;
 
-	@Value("${rest.adList}")
+	@Value("${restApi.adList}")
 	private String adList;
 
 	@Override

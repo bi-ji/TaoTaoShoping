@@ -11,6 +11,9 @@ import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
+import com.google.gson.JsonPrimitive;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
 
 /**
  * @author ZhuTao
@@ -24,22 +27,32 @@ public class GsonUtil {
 
 	static {
 		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.registerTypeAdapter(Date.class, new JsonSerializer<Date>() {
+
+			@Override
+			public JsonElement serialize(Date src, Type typeOfSrc, JsonSerializationContext context) {
+				return new JsonPrimitive(src.getTime());
+			}
+		});
 		gsonBuilder.registerTypeAdapter(Date.class, new JsonDeserializer<Date>() {
 
+			/**
+			 * 反序列化时调用
+			 */
 			@Override
 			public Date deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
 					throws JsonParseException {
 				return new Date(json.getAsJsonPrimitive().getAsLong());
 			}
 		});
+		// gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
 		gson = gsonBuilder.create();
 	}
 
 	public static Gson getGson() {
 		return gson;
 	}
-	
-	
+
 	public static void main(String[] args) {
 		Map<String, Object> retVal = new HashMap<>();
 		retVal.put("name", "张");
@@ -47,7 +60,7 @@ public class GsonUtil {
 		retVal.put("birthday", new Date());
 		String json = GsonUtil.getGson().toJson(retVal);
 		System.out.println("json = " + json);
-		
+
 	}
 
 }

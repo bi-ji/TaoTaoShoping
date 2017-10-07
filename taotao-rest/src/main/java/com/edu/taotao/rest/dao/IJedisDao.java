@@ -24,4 +24,6 @@ public interface IJedisDao {
 
 	Long decr(String key);
 
+	Long expire(String key, Integer seconds);
+
 }

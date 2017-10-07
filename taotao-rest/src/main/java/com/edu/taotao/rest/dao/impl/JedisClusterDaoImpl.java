@@ -57,4 +57,9 @@ public class JedisClusterDaoImpl implements IJedisDao {
 		return jedisCluster.decr(key);
 	}
 
+	@Override
+	public Long expire(String key, Integer seconds) {
+		return jedisCluster.expire(key, seconds);
+	}
+
 }

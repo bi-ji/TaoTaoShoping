@@ -3,6 +3,7 @@ package com.edu.taotao.portal.service.impl;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -34,6 +35,9 @@ public class SearchServiceImpl implements ISearchService {
 		param.put("q", queryCondition);
 		param.put("page", page + "");
 		String retJson = HttpUtil.doGet(solrUrl + searchInterface, param);
+		if (StringUtils.isBlank(retJson)) {
+			throw new RuntimeException("solr服务出错");
+		}
 		TaotaoResult taotaoResult = GsonUtil.getGson().fromJson(retJson, TaotaoResult.class);
 		if (taotaoResult.getStatus() == 200) {
 			String voJson = GsonUtil.getGson().toJson(taotaoResult.getData());
