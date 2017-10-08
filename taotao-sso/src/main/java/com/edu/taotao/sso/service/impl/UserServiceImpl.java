@@ -90,7 +90,7 @@ public class UserServiceImpl implements IUserService {
 			String token = UUID.randomUUID().toString();
 			loginUser.setPassword(null);
 			jedisDao.set(REDIS_KEY_USER_TOKEN + ":" + token, GsonUtil.getGson().toJson(loginUser));
-			jedisDao.expire(REDIS_KEY_USER_TOKEN + ":" + loginUser.getId(), REDIS_KEY_USER_EXPIRE);
+			jedisDao.expire(REDIS_KEY_USER_TOKEN + ":" + token, REDIS_KEY_USER_EXPIRE);
 			return TaotaoResult.ok(token);
 		}
 	}
