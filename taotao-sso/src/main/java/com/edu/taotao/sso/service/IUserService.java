@@ -1,5 +1,8 @@
 package com.edu.taotao.sso.service;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import com.taotao.common.pojo.TaotaoResult;
 import com.taotao.pojo.TbUser;
 
@@ -7,12 +10,13 @@ import com.taotao.pojo.TbUser;
  * @author ZhuTao
  * @version 1.0
  * @Date 2017年10月8日
- * @description 
+ * @description
  */
 public interface IUserService {
 
 	/**
 	 * 检查用户输入的参数
+	 * 
 	 * @param param
 	 * @param type
 	 * @return
@@ -29,14 +33,18 @@ public interface IUserService {
 
 	/**
 	 * 用户登录
+	 * 
 	 * @param username
 	 * @param password
+	 * @param response
+	 * @param request
 	 * @return
 	 */
-	TaotaoResult userLogin(String username, String password);
+	TaotaoResult userLogin(String username, String password, HttpServletRequest request, HttpServletResponse response);
 
 	/**
 	 * 依据Token获取session中是否有用户
+	 * 
 	 * @param token
 	 * @return
 	 */
@@ -44,6 +52,7 @@ public interface IUserService {
 
 	/**
 	 * 用户退出登录
+	 * 
 	 * @param token
 	 * @return
 	 */

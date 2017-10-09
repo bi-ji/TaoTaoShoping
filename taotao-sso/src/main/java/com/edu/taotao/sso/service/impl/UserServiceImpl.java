@@ -4,6 +4,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,6 +17,7 @@ import com.edu.taotao.sso.dao.IJedisDao;
 import com.edu.taotao.sso.service.IUserService;
 import com.google.gson.Gson;
 import com.taotao.common.pojo.TaotaoResult;
+import com.taotao.common.utils.CookieUtils;
 import com.taotao.common.utils.GsonUtil;
 import com.taotao.mapper.TbUserMapper;
 import com.taotao.pojo.TbUser;
@@ -75,7 +79,8 @@ public class UserServiceImpl implements IUserService {
 	}
 
 	@Override
-	public TaotaoResult userLogin(String username, String password) {
+	public TaotaoResult userLogin(String username, String password, HttpServletRequest request,
+			HttpServletResponse response) {
 		TbUserCriteria example = new TbUserCriteria();
 		Criteria criteria = example.createCriteria();
 		criteria.andUsernameEqualTo(username);
@@ -91,6 +96,8 @@ public class UserServiceImpl implements IUserService {
 			loginUser.setPassword(null);
 			jedisDao.set(REDIS_KEY_USER_TOKEN + ":" + token, GsonUtil.getGson().toJson(loginUser));
 			jedisDao.expire(REDIS_KEY_USER_TOKEN + ":" + token, REDIS_KEY_USER_EXPIRE);
+			// 设置cookies信息
+			CookieUtils.setCookie(request, response, "TT_TOKEN", token);
 			return TaotaoResult.ok(token);
 		}
 	}
@@ -108,7 +115,7 @@ public class UserServiceImpl implements IUserService {
 	@Override
 	public TaotaoResult userLogout(String token) {
 		try {
-			jedisDao.del(REDIS_KEY_USER_TOKEN + ":" + token);			
+			jedisDao.del(REDIS_KEY_USER_TOKEN + ":" + token);
 		} catch (Exception e) {
 			return TaotaoResult.build(400, "用户退出登录redis异常");
 		}
