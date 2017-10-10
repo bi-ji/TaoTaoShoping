@@ -23,6 +23,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 
 	@Autowired
 	private UserServiceImpl userService;
+	
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
@@ -45,6 +46,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 	}
 
 	@Override
+	
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
 			throws Exception {
 		// 方法执行之后，返回ModelAndView之后，响应用户之后
