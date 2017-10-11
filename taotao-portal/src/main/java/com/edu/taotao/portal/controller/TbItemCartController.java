@@ -42,6 +42,7 @@ public class TbItemCartController {
 		return "cartSuccess";
 	}
 
+	
 	@RequestMapping("/add/{itemId}")
 	public String addItemToCart(@PathVariable Long itemId, @RequestParam(defaultValue = "1") Integer num,
 			HttpServletRequest request, HttpServletResponse response) {
