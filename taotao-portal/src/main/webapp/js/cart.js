@@ -3,6 +3,7 @@ var TTCart = {
 		
 	},
 	itemNumChange : function(){
+		// todo make this
 		$(".increment").click(function(){//＋
 			var _thisInput = $(this).siblings("input");
 			_thisInput.val(eval(_thisInput.val()) + 1);

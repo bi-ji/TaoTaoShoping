@@ -34,8 +34,14 @@ public class TbItemCartController {
 	
 	@RequestMapping("/add/{itemId}")
 	public String addItemToCart(@PathVariable Long itemId,HttpServletRequest request,HttpServletResponse response) {
-		tbItemCartService.addItemToCart(itemId,request,response);
+		tbItemCartService.addItemToCart(itemId,1, request,response);
 		return "cartSuccess";
+	}
+	
+	@RequestMapping("/delete/{id}")
+	@ResponseBody
+	public TaotaoResult deleteCartItemById(@PathVariable Long id,HttpServletRequest request,HttpServletResponse response) {
+		return tbItemCartService.deleteCartItemById(id,request,response);
 	}
 	
 }
