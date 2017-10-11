@@ -1,5 +1,7 @@
 package com.edu.taotao.portal.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -8,9 +10,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.edu.taotao.portal.service.ITbItemCartService;
+import com.taotao.common.pojo.ItemCartVO;
 import com.taotao.common.pojo.TaotaoResult;
 
 /**
@@ -22,26 +26,33 @@ import com.taotao.common.pojo.TaotaoResult;
 @Controller
 @RequestMapping("/cart")
 public class TbItemCartController {
-	
+
 	@Autowired
-	private ITbItemCartService tbItemCartService; 
+	private ITbItemCartService tbItemCartService;
 
 	@RequestMapping("/cart")
-	public String showCartJsp(HttpServletRequest request,HttpServletResponse response,Model model) {
-		model.addAttribute("cartList",null);
+	public String showCartJsp(HttpServletRequest request, HttpServletResponse response, Model model) {
+		List<ItemCartVO> vos = tbItemCartService.findCartItems(request, response);
+		model.addAttribute("cartList", vos);
 		return "cart";
 	}
-	
-	@RequestMapping("/add/{itemId}")
-	public String addItemToCart(@PathVariable Long itemId,HttpServletRequest request,HttpServletResponse response) {
-		tbItemCartService.addItemToCart(itemId,1, request,response);
+
+	@RequestMapping("/success")
+	public String addCartSuccsss() {
 		return "cartSuccess";
 	}
-	
-	@RequestMapping("/delete/{id}")
-	@ResponseBody
-	public TaotaoResult deleteCartItemById(@PathVariable Long id,HttpServletRequest request,HttpServletResponse response) {
-		return tbItemCartService.deleteCartItemById(id,request,response);
+
+	@RequestMapping("/add/{itemId}")
+	public String addItemToCart(@PathVariable Long itemId, @RequestParam(defaultValue = "1") Integer num,
+			HttpServletRequest request, HttpServletResponse response) {
+		tbItemCartService.addItemToCart(itemId, num, request, response);
+		return "redirect:/cart/success.html";
 	}
-	
+
+	@RequestMapping("/delete/{id}")
+	public String deleteCartItemById(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response) {
+		tbItemCartService.deleteCartItemById(id, request, response);
+		return "redirect:/cart/cart.html";
+	}
+
 }

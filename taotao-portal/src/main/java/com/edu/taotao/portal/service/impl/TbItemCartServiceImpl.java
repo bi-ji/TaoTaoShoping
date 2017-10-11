@@ -7,11 +7,11 @@ import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.solr.common.luke.FieldFlag;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.edu.taotao.portal.service.ITbItemCartService;
+import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import com.taotao.common.pojo.ItemCartVO;
 import com.taotao.common.pojo.TaotaoResult;
@@ -32,7 +32,7 @@ public class TbItemCartServiceImpl implements ITbItemCartService {
 	@Value("${rest.url}")
 	private String restUrl;
 
-	@Value("${restApi.itemInf}")
+	@Value("${restApi.itemInfo}")
 	private String restApiItemInfo;
 
 	@Override
@@ -47,7 +47,7 @@ public class TbItemCartServiceImpl implements ITbItemCartService {
 			cartVOs = GsonUtil.getGson().fromJson(ttCart, new TypeToken<List<ItemCartVO>>() {
 			}.getType());
 			List<ItemCartVO> exist = cartVOs.stream().map(item -> {
-				if (item.getId().equals(itemId)) {
+				if (item.getId() == itemId) {
 					item.setNum(item.getNum() + num);
 					flag.add(1);
 					return item;
@@ -55,6 +55,7 @@ public class TbItemCartServiceImpl implements ITbItemCartService {
 				return item;
 
 			}).collect(Collectors.toList());
+			CookieUtils.setCookie(request, response, "TT_CART", GsonUtil.getGson().toJson(exist));
 		}
 		// 查询商品信息
 		if (flag.size() == 1 && flag.get(0) == 1) {// Cookies中存在商品信息
@@ -86,10 +87,26 @@ public class TbItemCartServiceImpl implements ITbItemCartService {
 		List<ItemCartVO> vos = GsonUtil.getGson().fromJson(cartCookiesJson, new TypeToken<List<ItemCartVO>>() {
 		}.getType());
 		List<ItemCartVO> deletedList = vos.stream().filter(cart -> {
-			return !cart.getId().equals(id);
+			return !(cart.getId() == id);
 		}).collect(Collectors.toList());
 		CookieUtils.setCookie(request, response, "TT_CART", GsonUtil.getGson().toJson(deletedList));
 		return TaotaoResult.ok();
+	}
+
+	@Override
+	public List<ItemCartVO> findCartItems(HttpServletRequest request, HttpServletResponse response) {
+		String retJson = CookieUtils.getCookieValue(request, "TT_CART");
+		if (retJson == null) {
+			return new ArrayList<>();
+		}
+		try {
+			List<ItemCartVO> vos = GsonUtil.getGson().fromJson(retJson, new TypeToken<List<ItemCartVO>>() {
+			}.getType());
+			return vos;
+		} catch (JsonSyntaxException e) {
+			e.printStackTrace();
+		}
+		return new ArrayList<>();
 	}
 
 }
