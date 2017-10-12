@@ -18,7 +18,7 @@
 
 	<mvc:interceptors>
 		<mvc:interceptor>
-			<mvc:mapping path="/item/**" /> <!-- 拦截所有请求 -->
+			<mvc:mapping path="/order/**" /> <!-- 拦截购物请求 -->
 			<bean id="loginInterceptor" class="com.edu.taotao.portal.interceptor.LoginInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>

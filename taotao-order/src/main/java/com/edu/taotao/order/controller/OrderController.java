@@ -1,0 +1,36 @@
+package com.edu.taotao.order.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.edu.taotao.order.service.IOrderService;
+import com.taotao.common.dto.OrderDTO;
+import com.taotao.common.pojo.TaotaoResult;
+
+/**
+ * @author ZhuTao
+ * @version 1.0
+ * @Date 2017年10月12日
+ * @description
+ */
+@RequestMapping("/order")
+public class OrderController {
+
+	@Autowired
+	private IOrderService orderService;
+	
+
+
+	@RequestMapping(value = "/create", method = RequestMethod.POST)
+	@ResponseBody
+	public TaotaoResult createOrder(@RequestBody OrderDTO orderDTO) {
+		TaotaoResult result = orderService.saveOrder(orderDTO);
+		return result;
+	}
+
+
+
+}

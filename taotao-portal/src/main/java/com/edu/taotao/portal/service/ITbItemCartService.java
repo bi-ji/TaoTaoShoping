@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.taotao.common.dto.OrderDTO;
 import com.taotao.common.pojo.ItemCartVO;
 import com.taotao.common.pojo.TaotaoResult;
 
@@ -44,5 +45,7 @@ public interface ITbItemCartService {
 	 * @return
 	 */
 	List<ItemCartVO> findCartItems(HttpServletRequest request, HttpServletResponse response);
+
+
 
 }
