@@ -1,5 +1,6 @@
 package com.edu.taotao.order.service.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -16,8 +17,12 @@ import com.taotao.mapper.TbOrderItemMapper;
 import com.taotao.mapper.TbOrderMapper;
 import com.taotao.mapper.TbOrderShippingMapper;
 import com.taotao.pojo.TbOrder;
+import com.taotao.pojo.TbOrderCriteria;
 import com.taotao.pojo.TbOrderItem;
+import com.taotao.pojo.TbOrderItemCriteria;
+import com.taotao.pojo.TbOrderItemCriteria.Criteria;
 import com.taotao.pojo.TbOrderShipping;
+import com.taotao.pojo.TbOrderShippingCriteria;
 
 import redis.clients.jedis.Jedis;
 
@@ -84,6 +89,27 @@ public class OrderServiceImpl implements IOrderService {
 		orderShipping.setUpdated(date);
 		tbOrderShippingMapper.insert(orderShipping);
 		return TaotaoResult.ok(orderId);
+	}
+
+	@Override
+	public TaotaoResult findOrderInfoByOrderId(String orderId) {
+		OrderDTO orderDTO = new OrderDTO();
+		orderDTO = (OrderDTO) tbOrderMapper.selectByPrimaryKey(orderId);
+		List<TbOrderItem> orderItems = new ArrayList<>();
+		TbOrderItemCriteria example = new TbOrderItemCriteria();
+		Criteria criteria = example.createCriteria();
+		criteria.andOrderIdEqualTo(orderId);
+		orderItems = tbOrderItemMapper.selectByExample(example);
+		orderDTO.setOrderItems(orderItems);
+		TbOrderShippingCriteria shippingExample = new TbOrderShippingCriteria();
+		com.taotao.pojo.TbOrderShippingCriteria.Criteria shippingCriteria = shippingExample.createCriteria();
+		shippingCriteria.andOrderIdEqualTo(orderId);
+		List<TbOrderShipping> orderShippings = tbOrderShippingMapper.selectByExample(shippingExample);
+		if (orderShippings == null || orderShippings.size() != 1) {
+			orderDTO.setOrderShipping(null);
+		}
+		orderDTO.setOrderShipping(orderShippings.get(0));
+		return TaotaoResult.ok(orderDTO);
 	}
 
 }

@@ -18,4 +18,11 @@ public interface IOrderService {
 	 */
 	TaotaoResult saveOrder(OrderDTO orderDTO);
 
+	/**
+	 * 依据订单ID查询订单
+	 * @param orderId
+	 * @return
+	 */
+	TaotaoResult findOrderInfoByOrderId(String orderId);
+
 }
