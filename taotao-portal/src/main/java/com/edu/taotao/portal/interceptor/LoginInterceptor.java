@@ -35,6 +35,8 @@ public class LoginInterceptor implements HandlerInterceptor {
 			response.sendRedirect(userService.ssoUrl + userService.ssoApiShowPageLogin + "?redirect=" + request.getRequestURL());
 			return false;
 		}
+		//设置用户到requset中
+		request.setAttribute("user", tbUser);
 		return true;
 	}
 

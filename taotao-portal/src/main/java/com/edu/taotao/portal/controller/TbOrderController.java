@@ -17,6 +17,7 @@ import com.edu.taotao.portal.service.ITbItemCartService;
 import com.taotao.common.dto.OrderDTO;
 import com.taotao.common.pojo.ItemCartVO;
 import com.taotao.common.pojo.TaotaoResult;
+import com.taotao.pojo.TbUser;
 
 /**
  * @author ZhuTao
@@ -43,7 +44,10 @@ public class TbOrderController {
 	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
-	public String createOrder(@RequestBody OrderDTO orderDTO, Model model) {
+	public String createOrder(@RequestBody OrderDTO orderDTO, Model model,HttpServletRequest request) {
+		TbUser user = (TbUser) request.getAttribute("user");
+		orderDTO.setUserId(user.getId());
+		orderDTO.setBuyerNick(user.getUsername());
 		TaotaoResult result = orderService.createOrder(orderDTO);
 		return "success";
 	}
