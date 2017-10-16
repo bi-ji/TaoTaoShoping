@@ -12,9 +12,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.edu.taotao.portal.dto.OrderDTO;
 import com.edu.taotao.portal.service.IOrderService;
 import com.edu.taotao.portal.service.ITbItemCartService;
-import com.taotao.common.dto.OrderDTO;
+
 import com.taotao.common.pojo.ItemCartVO;
 import com.taotao.common.pojo.TaotaoResult;
 import com.taotao.pojo.TbUser;

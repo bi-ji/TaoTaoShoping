@@ -3,8 +3,8 @@ package com.edu.taotao.portal.service.impl;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import com.edu.taotao.portal.dto.OrderDTO;
 import com.edu.taotao.portal.service.IOrderService;
-import com.taotao.common.dto.OrderDTO;
 import com.taotao.common.pojo.TaotaoResult;
 import com.taotao.common.utils.GsonUtil;
 import com.taotao.common.utils.HttpUtil;

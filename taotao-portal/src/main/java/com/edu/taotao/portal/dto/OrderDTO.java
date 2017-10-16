@@ -1,4 +1,4 @@
-package com.taotao.common.dto;
+package com.edu.taotao.portal.dto;
 
 import java.util.List;
 
