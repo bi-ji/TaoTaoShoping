@@ -8,23 +8,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import com.alibaba.druid.sql.ast.expr.SQLCaseExpr.Item;
+import com.edu.taotao.order.dto.OrderDTO;
 import com.edu.taotao.order.redis.IJedisDao;
 import com.edu.taotao.order.service.IOrderService;
-import com.taotao.common.dto.OrderDTO;
 import com.taotao.common.pojo.TaotaoResult;
 import com.taotao.mapper.TbOrderItemMapper;
 import com.taotao.mapper.TbOrderMapper;
 import com.taotao.mapper.TbOrderShippingMapper;
 import com.taotao.pojo.TbOrder;
-import com.taotao.pojo.TbOrderCriteria;
 import com.taotao.pojo.TbOrderItem;
 import com.taotao.pojo.TbOrderItemCriteria;
 import com.taotao.pojo.TbOrderItemCriteria.Criteria;
 import com.taotao.pojo.TbOrderShipping;
 import com.taotao.pojo.TbOrderShippingCriteria;
-
-import redis.clients.jedis.Jedis;
 
 /**
  * @author ZhuTao

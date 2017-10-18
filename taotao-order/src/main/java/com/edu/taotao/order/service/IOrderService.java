@@ -1,6 +1,6 @@
 package com.edu.taotao.order.service;
 
-import com.taotao.common.dto.OrderDTO;
+import com.edu.taotao.order.dto.OrderDTO;
 import com.taotao.common.pojo.TaotaoResult;
 
 /**
